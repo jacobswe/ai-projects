@@ -2,3 +2,6 @@
 ## ai-projects
 
 I am a Senior Data Scientist, and a strong proponent of continuous learning and education. This repository will log my efforts and progress in broadening my data scientific base.
+
+1) Othello AI
+This is an attempt at modelling the dynamics of the Othello board game, and then to create refinforcement learning implementations of self-play engines.
