@@ -30,7 +30,7 @@ class OthelloEnv(gym.Env):
             position = np.array([-x.number for x in self.board]).reshape(self.grid_shape)
             
         la_grid = np.array(self.legal_actions).reshape(self.grid_shape)
-        out = np.stack([position,la_grid], axis = -1).reshape(2, 8, 8)
+        out = np.moveaxis(np.stack([position,la_grid], axis = -1), -1, 0)
         return out
             
     @property
