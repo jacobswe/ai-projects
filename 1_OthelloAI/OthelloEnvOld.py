@@ -9,19 +9,16 @@ class OthelloEnv(gym.Env):
 
     def __init__(self, verbose = False, manual = False):
         super(OthelloEnv, self).__init__()
-        
         self.name = 'othello'
         self.manual = manual
-        self.verbose = verbose
         self.grid_length = 8
         self.n_players = 2
-        
         self.num_squares = self.grid_length * self.grid_length
         self.grid_shape = (self.grid_length, self.grid_length)
-        
         self.action_space = gym.spaces.Discrete(self.num_squares)
-        self.observation_space = gym.spaces.Box(-1, 1, (2,)+self.grid_shape)
-        
+        self.observation_space = gym.spaces.Box(-1, 1, self.grid_shape+(2,))
+        self.verbose = verbose
+
     @property
     def observation(self):
         if self.players[self.current_player_num].token.number == 1:
@@ -30,7 +27,7 @@ class OthelloEnv(gym.Env):
             position = np.array([-x.number for x in self.board]).reshape(self.grid_shape)
             
         la_grid = np.array(self.legal_actions).reshape(self.grid_shape)
-        out = np.stack([position,la_grid], axis = -1).reshape(2, 8, 8)
+        out = np.stack([position,la_grid], axis = -1)
         return out
             
     @property
